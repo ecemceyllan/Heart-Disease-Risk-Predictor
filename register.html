@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Register - Heart Disease Risk Predictor{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <div class="login-left">
+    <img src="{{ url_for('static', filename='heart.png') }}" alt="Heart Icon" class="login-image">
+    <h2>🫀 Heart Disease Risk Predictor</h2>
+    <p class="login-message">Join us to track and manage your heart health.</p>
+    <p class="login-subtext">Your health journey starts here.</p>
+  </div>
+
+  <div class="login-right">
+    <div class="login-card">
+      <h2>Create an Account</h2>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+
+      <form method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+          <label for="sex">Gender</label>
+          <select id="sex" name="sex" required>
+              <option value="">Select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+          </select>
+
+          <button class="login-button" type="submit">Register</button>
+      </form>
+
+      <p style="text-align: center; margin-top: 15px;">Already have an account? <a href="/login">Login here</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

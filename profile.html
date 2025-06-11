@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+  <h2>👤 My Profile</h2>
+
+  <div class="profile-info">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Gender:</strong> {{ 'Male' if user.sex == 'M' else 'Female' }}</p>
+    <p><strong>Role:</strong> {{ user.role.title() }}</p>
+  </div>
+
+  <div class="stats-box">
+    <h3>📊 Prediction Stats</h3>
+    <ul>
+      <li>Total Predictions: {{ total }}</li>
+      <li>Average Risk: {{ avg_risk }}%</li>
+      <li>Last Prediction: {{ last_time }}</li>
+      <li>Low Risk: {{ levels['Low'] }} | Moderate Risk: {{ levels['Moderate'] }} | High Risk: {{ levels['High'] }}</li>
+    </ul>
+  </div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Heart Risk App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+<header class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo"> Heart Disease Risk Predictor</div>
+    {% if session.get('user_id') %}
+    <nav class="navbar-links">
+      {% if session.get('role') == 'admin' %}
+        <a href="/admin">Admin Panel</a>
+      {% else %}
+        <a href="/predict">Predict</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+      {% endif %}
+      <div class="navbar-user">
+        <img src="{{ url_for('static', filename='male.png') if session.get('sex') == 'M' else url_for('static', filename='female.png') }}"
+             alt="avatar" width="32" height="32" style="border-radius: 50%; vertical-align: middle;">
+        <span>{{ session.get('username') }}</span>
+        <a href="/logout" class="logout-button">Logout</a>
+      </div>
+    </nav>
+    {% endif %}
+  </div>
+</header>
+
+<main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

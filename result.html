@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Result{% endblock %}
+{% block content %}
+<h2>📊 Prediction Result</h2>
+<p><strong>Risk Percentage:</strong> {{ risk_percent }}%</p>
+<p><strong>Risk Level:</strong> <span class="level-{{ risk_level|lower }}">{{ risk_level }}</span></p>
+<p>{{ message }}</p>
+
+<br>
+<a href="/predict">← Back to Prediction</a> |
+<a href="/dashboard">📋 My Dashboard</a> |
+<a href="/logout">🚪 Logout</a>
+{% endblock %}

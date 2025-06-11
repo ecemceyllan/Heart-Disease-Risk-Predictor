@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Predict Risk{% endblock %}
+
+{% block content %}
+<h2>Heart Disease Risk Prediction Form</h2>
+
+<form method="POST">
+    <label>
+        Age:
+        <div class="field-info">Enter your age in years.</div>
+        <input type="number" name="Age" value="{{ data.get('Age', '') }}" required>
+    </label>
+
+    <label>
+        Biological Sex:
+        <div class="field-info">Used in risk calculation, as male and female risk profiles differ.</div>
+        <select name="Sex" required>
+            <option value="M" {% if data.get('Sex') == 'M' %}selected{% endif %}>Male</option>
+            <option value="F" {% if data.get('Sex') == 'F' %}selected{% endif %}>Female</option>
+        </select>
+    </label>
+
+    <label>
+        Chest Pain Type:
+        <div class="field-info">Select the type of chest pain you experience, if any.</div>
+        <select name="ChestPainType" required>
+            <option value="ATA" {% if data.get('ChestPainType') == 'ATA' %}selected{% endif %}>Typical Angina (ATA)</option>
+            <option value="NAP" {% if data.get('ChestPainType') == 'NAP' %}selected{% endif %}>Atypical Angina (NAP)</option>
+            <option value="ASY" {% if data.get('ChestPainType') == 'ASY' %}selected{% endif %}>Asymptomatic (ASY)</option>
+            <option value="TA"  {% if data.get('ChestPainType') == 'TA'  %}selected{% endif %}>Non-Anginal Pain (TA)</option>
+        </select>
+    </label>
+
+    <label>
+        Resting Blood Pressure (mm Hg):
+        <div class="field-info">Your blood pressure measured at rest.</div>
+        <input type="number" name="RestingBP" value="{{ data.get('RestingBP', '') }}" required>
+    </label>
+
+    <label>
+        Cholesterol Level (mg/dL):
+        <div class="field-info">Your total cholesterol level. Normal: 125–200 mg/dL.</div>
+        <input type="number" name="Cholesterol" value="{{ data.get('Cholesterol', '') }}" required>
+    </label>
+
+    <label>
+        Fasting Blood Sugar > 120 mg/dL?  
+        <div class="field-info">Have you ever had fasting glucose above 120 mg/dL?</div>
+        <select name="FastingBS" required>
+            <option value="1" {% if data.get('FastingBS') == '1' %}selected{% endif %}>Yes</option>
+            <option value="0" {% if data.get('FastingBS') == '0' %}selected{% endif %}>No</option>
+        </select>
+    </label>
+
+    <label>
+        Resting ECG Results:
+        <div class="field-info">Based on your resting ECG test.</div>
+        <select name="RestingECG" required>
+            <option value="Normal" {% if data.get('RestingECG') == 'Normal' %}selected{% endif %}>Normal</option>
+            <option value="ST"     {% if data.get('RestingECG') == 'ST'     %}selected{% endif %}>ST abnormality</option>
+            <option value="LVH"    {% if data.get('RestingECG') == 'LVH'    %}selected{% endif %}>Left Ventricular Hypertrophy</option>
+        </select>
+    </label>
+
+    <label>
+        Maximum Heart Rate Achieved:
+        <div class="field-info">The highest heart rate you reached during exercise.</div>
+        <input type="number" name="MaxHR" value="{{ data.get('MaxHR', '') }}" required>
+    </label>
+
+    <label>
+        Exercise-Induced Angina:
+        <div class="field-info">Did you feel chest pain while exercising?</div>
+        <select name="ExerciseAngina" required>
+            <option value="Y" {% if data.get('ExerciseAngina') == 'Y' %}selected{% endif %}>Yes</option>
+            <option value="N" {% if data.get('ExerciseAngina') == 'N' %}selected{% endif %}>No</option>
+        </select>
+    </label>
+
+    <label>
+        ST Depression (Oldpeak): 
+        <div class="field-info">ST depression observed during exercise testing.</div>
+        <input type="number" step="0.1" name="Oldpeak" value="{{ data.get('Oldpeak', '') }}" required>
+    </label>
+
+    <label>
+        Slope of ST Segment:
+        <div class="field-info">Shape of the ST segment in your ECG reading.</div>
+        <select name="ST_Slope" required>
+            <option value="Up"   {% if data.get('ST_Slope') == 'Up'   %}selected{% endif %}>Upward</option>
+            <option value="Flat" {% if data.get('ST_Slope') == 'Flat' %}selected{% endif %}>Flat</option>
+            <option value="Down" {% if data.get('ST_Slope') == 'Down' %}selected{% endif %}>Downward</option>
+        </select>
+    </label>
+
+    <br><br>
+    <button type="submit">{{ submit_label or 'Predict Risk' }}</button>
+</form>
+{% endblock %}
